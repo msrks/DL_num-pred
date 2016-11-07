@@ -1,3 +1,4 @@
 logs/
 mnist/
 models/checkpoint
+.python-version
