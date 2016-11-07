@@ -21,14 +21,31 @@ $ pyenv local venv_DL_num-pred
 $ echo .python-version >> .gitignore
 $ cat .gitignore # for check
 $ pip install gunicorn
+
+# install tensorflow @ Mac OS X
 $ export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-0.10.0-py3-none-any.whl
 $ pip install $TF_BINARY_URL
 $ pip install numpy flask tflearn
 $ pip freeze > requirements.txt
+```
+
+requirements.txt の tensorflowの箇所を書き換え
+```
+- tensorflow==0.10.0
++ https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow-0.10.0-cp35-cp35m-linux_x86_64.whl
+```
+
+```
 $ echo python-3.5.2 > runtime.txt
 $ echo web: gunicorn app:app --log-file= > Procfile
 $ heroku create riki-num-pred
 $ heroku buildpacks:set heroku/python
+
+$ git add -A
+$ git commit -m "deploy heroku"
+$ git push heroku master
+$ heroku ps:scale web=1
+$ heroku open
 ```
 
 ## NN Archtecture
